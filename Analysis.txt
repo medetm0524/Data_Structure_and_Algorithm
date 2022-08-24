@@ -8,9 +8,9 @@ Task 2.
 Worst case Big-O is O(n^2) because there is 2 for loop.
 
 Task 3.
-Worst case Big-O is O(n) because there is one for loop.
+Worst case Big-O is O(nlogn) because there is one for loop and sorting algorithm.
 
 Taks 4.
-Worst case Big-O is O(n) because we have one for loop. 
+Worst case Big-O is O(nlogn) because we have one for loop and sorting algorithm. 
 
 

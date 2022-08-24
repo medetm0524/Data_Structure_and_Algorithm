@@ -3,6 +3,7 @@ Read file into texts and calls.
 It's ok if you don't understand how to read files.
 """
 import csv
+import re
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -41,21 +42,26 @@ telemarketers_B = []
 for i in calls:
     if i[0][1:4]== '080':
         if i[1][0]=='(':
-            area_codes_B.append(i[1][1:4])
+            res = re.findall(r'\(.*?\)', i[1])
+            area_codes_B.append(res[0][1:-1])
         if i[1][0]=='7' or i[1][0]=='8' or i[1][0]=='9':
             mobile_pref_B.append(i[1][0:4])
 
-init_by_B = set(area_codes_B+mobile_pref_B)
-init_by_B = list(map(int, init_by_B))
-uniq_by_B = sorted(set(init_by_B))
+
+area_code_B = list(map(int, area_codes_B))
+area_code_B = sorted(set(area_code_B))
 
 print("The numbers called by people in Bangalore have codes:")
-for i in uniq_by_B:
-    if len(str(i))==2:
-        print('0'+str(i))
-    else:
-        print(i)
+for i in area_code_B:
+    print('0'+str(i))
+   
+    
+mobile_pref_B = set(mobile_pref_B)
+mobile_pref_B = list(map(int, mobile_pref_B))
+mobile_pref_B = sorted(set(mobile_pref_B))
 
+for i in mobile_pref_B:
+    print(i)
 
 
 """
@@ -69,13 +75,17 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+call_from_B = 0
+call_to_B = 0
+for each_record in calls:
+    if "080" in each_record[0]:
+        call_from_B+=1
+        if "080" in each_record[1]:
+            call_to_B+=1
+            
+percentage = call_to_B/call_from_B
+print("{:.2f}% percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(percentage*100))
 
-call_to_B = []
-for i in calls:
-    if i[0][1:4]== '080' and i[1][1:4]== '080':
-        call_to_B.append(i[1])
-
-print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(
-    float(len(call_to_B)/len(calls))*100))
-
+            
+        
 

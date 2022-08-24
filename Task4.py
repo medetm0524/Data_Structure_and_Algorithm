@@ -24,28 +24,22 @@ Print a message:
 <list of numbers>
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
-phone_market = []
-phone_user = []
+callers = []
+numbers_to_avoid = []
 
 for i in calls:
-    if i[0][0:3]=='140':
-        phone_market.append(i[0])
-    
-    if i[1][0:3]=='140':
-        phone_user.append(i[1])
+    callers.append(i[0])
+    numbers_to_avoid.append(i[1])
 
 for j in texts:
-    if j[0][0:3]=='140':
-        phone_user.append(j[0])
-    if j[1][0:3]=='140':
-        phone_user.append(j[1])
+    numbers_to_avoid.append(j[0])
+    numbers_to_avoid.append(j[1])
 
-phone_market = set(phone_market) - set(phone_user)
-phone_market = list(map(int, phone_market))
-phone_market = sorted(set(phone_market))
+telemarkerter  = set(callers) - set(numbers_to_avoid)
+telemarkerter  = sorted(set(telemarkerter))
 
 print("These numbers could be telemarketers: ")
-for i in phone_market:
+for i in telemarkerter:
     print(i)
 
 
