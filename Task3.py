@@ -47,22 +47,11 @@ for i in calls:
         if i[1][0]=='7' or i[1][0]=='8' or i[1][0]=='9':
             mobile_pref_B.append(i[1][0:4])
 
-
-area_code_B = list(map(int, area_codes_B))
-area_code_B = sorted(set(area_code_B))
+result = set(area_codes_B).union(set(mobile_pref_B))
 
 print("The numbers called by people in Bangalore have codes:")
-for i in area_code_B:
-    print('0'+str(i))
-   
-    
-mobile_pref_B = set(mobile_pref_B)
-mobile_pref_B = list(map(int, mobile_pref_B))
-mobile_pref_B = sorted(set(mobile_pref_B))
-
-for i in mobile_pref_B:
+for i in sorted(result):
     print(i)
-
 
 """
 Part B: What percentage of calls from fixed lines in Bangalore are made
